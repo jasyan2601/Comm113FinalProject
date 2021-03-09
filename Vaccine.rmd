@@ -1,8 +1,19 @@
 ---
-title: "Vaccine.rmd"
+title: "Team Blue Proposal: Covid Vaccines"
 author: Team Blue
 output: html_document
 ---
+
+Section 1: Introduction
+
+We would like to analyze the distribution of covid vaccines across the US. 
+Source of data and details about each of the columns can be found here: https://github.com/owid/covid-19-data/tree/master/public/data/vaccinations#united-states-vaccination-data 
+
+The data was collected by the OWID, or Our World In Data. They in turn rely on the data from the CDC, or Centers for Disease Control and Prevention. 
+
+The data is organized as follows: The location and date columns tell where and when the observation was from. The other 12 columns give vaccine-specific information about that time and location. 
+
+Section 2: Data
 
 ```{r load_package}
 library(tidyverse)
@@ -15,3 +26,5 @@ cov_19_vaccine <- read.csv("data/us_state_vaccinations.csv")
 ```{r}
 glimpse(cov_19_vaccine) 
 ```
+
+Section 3: Data Analysis Plan
