@@ -11,3 +11,7 @@ library(tidyverse)
 ```{r load_dataset}
 cov_19_vaccine <- read.csv("data/us_state_vaccinations.csv")
 ```
+
+```{r}
+glimpse(cov_19_vaccine) 
+```
