@@ -1,0 +1,17 @@
+---
+title: "Vaccine.rmd"
+author: Team Blue
+output: html_document
+---
+
+```{r load_package}
+library(tidyverse)
+```
+
+```{r load_dataset}
+cov_19_vaccine <- read.csv("data/us_state_vaccinations.csv")
+```
+
+```{r}
+glimpse(cov_19_vaccine) 
+```
