@@ -1,13 +1,84 @@
 ---
 title: "Vaccine.rmd"
-author: Team Blue
+author: Team Blue - Jason Yan, Iris Lee, Vinh Hau
 output: html_document
 ---
-
-```{r load_package}
+```{r load_package, message = FALSE}
 library(tidyverse)
+library(ggplot2)
 ```
+
+ <div align="center"> <h1> **Research Proposal** </h1> </div>
+ 
+ 
+## 1 Introduction
+
+Given that Covid-19 vaccines are being delivered to people across the world, our team could not help but ponder the question: How is the limited vaccine being distributed? And more importantly, is it done fairly?
+
+Hence, by focusing the scope of our investigation to the vaccination distribution of the United States, we aim to explore how the U.S. distribute the vaccine and how efficient they administered the vaccines, since January 12th 2021 to the March 8th 2021 (a more complete data set will be updated to include more observations for the final presentations).
+
+Furthermore, we would also examine whether the U.S. is following through its promise to distribute the vaccine based on populations share relative to the U.S. total population. If time permits, we will also aim to explore whether any confounding factors (i.e.,race, income) could determine where these vaccines are ending up.
+
+### _1.1 Research Question_
+
+Where in the U.S. will people more likely to receive Covid-19 vaccines? (Predictive)
+
+
+### _1.2 Data_
+
+The dataset for this assignment can be found as a csv file under `us_state_vaccinations` in the `data` folder of the repository.
 
 ```{r load_dataset}
 cov_19_vaccine <- read.csv("data/us_state_vaccinations.csv")
 ```
+
+This is state-by-state (and other U.S. territories) data on United States COVID-19 vaccinations from the United States Centers for Disease Control and Prevention (CDC). DUring writing this proposal, data were only available up until March 8th 2021, hence, we may update our data set once again when working more closely for the presentation to ensure for an accurate analysis.However, we will refrain continuously updating our data as it could disrupt our work. 
+
+The descriptions of the variables in our data set `cov_19_vaccine` are as follows:
+
+-   `location`: name of the state or federal entity.
+-   `date`: date of the observation.
+-   `total_vaccinations`: total number of doses administered. This is counted as a single dose, and may not equal the total number of people vaccinated, depending on the specific dose regime (e.g. people receive multiple doses). If a person receives one dose of the vaccine, this metric goes up by 1. If they receive a second dose, it goes up by 1 again.
+-   `total_vaccinations_per_hundred`: total_vaccinations per 100 people in the total population of the state.
+daily_vaccinations_raw: daily change in the total number of doses administered. It is only calculated for consecutive days. This is a raw measure provided for data checks and transparency, but we strongly recommend that any analysis on daily vaccination rates be conducted using daily_vaccinations instead.
+-   `daily_vaccinations`: new doses administered per day (7-day smoothed). For countries that don't report data on a daily basis, we assume that doses changed equally on a daily basis over any periods in which no data was reported. This produces a complete series of daily figures, which is then averaged over a rolling 7-day window. An example of how we perform this calculation can be found here.
+-   `daily_vaccinations_per_million`: daily_vaccinations per 1,000,000 people in the total population of the state.
+-   `people_vaccinated`: total number of people who received at least one vaccine dose. If a person receives the first dose of a 2-dose vaccine, this metric goes up by 1. If they receive the second dose, the metric stays the same.
+-   `people_vaccinated_per_hundred`: people_vaccinated per 100 people in the total population of the state.
+-   `people_fully_vaccinated`: total number of people who received all doses prescribed by the vaccination protocol. If a person receives the first dose of a 2-dose vaccine, this metric stays the same. If they receive the second dose, the metric goes up by 1.
+-   `people_fully_vaccinated_per_hundred`: people_fully_vaccinated per 100 people in the total population of the state.
+-   `total_distributed`: cumulative counts of COVID-19 vaccine doses recorded as shipped in CDC's Vaccine Tracking System.
+-   `total_distributed_per_hundred`: cumulative counts of COVID-19 vaccine doses recorded as shipped in CDC's Vaccine Tracking System per 100 people in the total population of the state.
+-   `share_doses_used`: share of vaccination doses administered among those recorded as shipped in CDC's Vaccine Tracking System.
+
+## 2 Raw Data
+
+```{r}
+cov_19_vaccine %>%
+  glimpse()
+```
+There are `r nrow(cov_19_vaccine)` rows (observations) representing daily Covid-19 vaccinations statistics for all 52 states & other U.S. territories, and `r ncol(cov_19_vaccine)` columns (variables) in our data set. 
+
+
+## 3 Data Analysis Plan
+
+### _3.1 Variables_
+
+To answer "Where in the U.S. will people more likely to receive Covid-19 vaccines?", we think it is worth exploring  
+ 
+
+The outcome (response, Y) and predictor (explanatory, X) variables you will use to answer your question.
+
+### _3.2 Comparison Groups_
+
+The comparison groups you will use, if applicable.
+
+### _3.3 Preliminary exploratory data analysis_
+
+Very preliminary exploratory data analysis, including some summary statistics and visualizations, along with some explanation on how they help you learn more about your data. 
+
+### _3.4 Possible Method(s)_
+
+The method(s) that you believe will be useful in answering your question(s). 
+
+What results from these specific statistical methods are needed to support your hypothesized answer?
