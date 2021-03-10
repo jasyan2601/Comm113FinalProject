@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 title: "Vaccine.rmd"
 author: Team Blue - Jason Yan, Iris Lee, Vinh Hau
 output: html_document
@@ -8,10 +9,10 @@ library(tidyverse)
 library(ggplot2)
 ```
 
- <div align="center"> <h1> **Research Proposal** </h1> </div>
+<div align="center"> <h1> **Research Proposal** </h1> </div>
  
  
-## 1 Introduction
+## Section 1: Introduction
 
 Given that Covid-19 vaccines are being delivered to people across the world, our team could not help but ponder the question: How is the limited vaccine being distributed? And more importantly, is it done fairly?
 
@@ -26,13 +27,13 @@ Where in the U.S. will people more likely to receive Covid-19 vaccines? (Predict
 
 ### _1.2 Data_
 
-The dataset for this assignment can be found as a csv file under `us_state_vaccinations` in the `data` folder of the repository.
+The dataset for this assignment can be found as a csv file under `us_state_vaccinations` in the `data` folder of the repository.Source of data and details about each of the columns can be found here: https://github.com/owid/covid-19-data/tree/master/public/data/vaccinations#united-states-vaccination-data 
 
 ```{r load_dataset}
 cov_19_vaccine <- read.csv("data/us_state_vaccinations.csv")
 ```
 
-This is state-by-state (and other U.S. territories) data on United States COVID-19 vaccinations from the United States Centers for Disease Control and Prevention (CDC). DUring writing this proposal, data were only available up until March 8th 2021, hence, we may update our data set once again when working more closely for the presentation to ensure for an accurate analysis.However, we will refrain continuously updating our data as it could disrupt our work. 
+The data was collected by the OWID, or Our World In Data. They in turn rely on the data from the CDC, or Centers for Disease Control and Prevention. 
 
 The descriptions of the variables in our data set `cov_19_vaccine` are as follows:
 
@@ -51,7 +52,7 @@ daily_vaccinations_raw: daily change in the total number of doses administered. 
 -   `total_distributed_per_hundred`: cumulative counts of COVID-19 vaccine doses recorded as shipped in CDC's Vaccine Tracking System per 100 people in the total population of the state.
 -   `share_doses_used`: share of vaccination doses administered among those recorded as shipped in CDC's Vaccine Tracking System.
 
-## 2 Raw Data
+## Section 2: Raw Data
 
 ```{r}
 cov_19_vaccine %>%
@@ -60,7 +61,7 @@ cov_19_vaccine %>%
 There are `r nrow(cov_19_vaccine)` rows (observations) representing daily Covid-19 vaccinations statistics for all 52 states & other U.S. territories, and `r ncol(cov_19_vaccine)` columns (variables) in our data set. 
 
 
-## 3 Data Analysis Plan
+## Section 3: Data Analysis Plan
 
 ### _3.1 Variables_
 
@@ -82,3 +83,4 @@ Very preliminary exploratory data analysis, including some summary statistics an
 The method(s) that you believe will be useful in answering your question(s). 
 
 What results from these specific statistical methods are needed to support your hypothesized answer?
+
