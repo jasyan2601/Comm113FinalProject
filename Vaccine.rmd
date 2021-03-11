@@ -26,7 +26,7 @@ Where in the U.S. will people more likely to receive Covid-19 vaccines? (Predict
 
 ### _1.2 Data_
 
-The dataset for this assignment can be found as a csv file under `us_state_vaccinations` in the `data` folder of the repository.Source of data and details about each of the columns can be found here: https://github.com/owid/covid-19-data/tree/master/public/data/vaccinations#united-states-vaccination-data 
+The dataset for this assignment can be found as a csv file under `us_state_vaccinations` in the `data` folder of the repository. Source of data and details about each of the columns can be found here: https://github.com/owid/covid-19-data/tree/master/public/data/vaccinations#united-states-vaccination-data 
 
 ```{r load_dataset}
 cov_19_vaccine <- read.csv("data/us_state_vaccinations.csv")
@@ -64,22 +64,46 @@ There are `r nrow(cov_19_vaccine)` rows (observations) representing daily Covid-
 
 ### _3.1 Variables_
 
-To answer "Where in the U.S. will people more likely to receive Covid-19 vaccines?", we think it is worth exploring  
- 
+To answer "Where in the U.S. are people most likely to receive the Covid-19 vaccine?", the following columns are of immediate interest to us: location, date, total_vaccinations_per_hundred, and share_doses_used. 
 
-The outcome (response, Y) and predictor (explanatory, X) variables you will use to answer your question.
+We will use a predictor variable of location in order to see how the state of the pandemic is varying over geographical area. 
+
+We will use a predictor variable of date for a respresentative state, such as NY, in order to make predictions about the situation in the future.
+
+An explanatory variable of total_vaccinations_per_hundred tells us how close the state is towards achieving herd immunity. A high number would imply the state is a safer one to be in.
+
+An explanatory variable of share_doses_used tells us how in demand the vaccinations are in the state. In addition, many vaccine distribution centers give out vaccines to those in line when people who registered don't show up, so this statistic additionally tells us how likely one is to get a vaccine by waiting in line. 
+
+Mixing and matching the predictor and explanator variables can gives us different results. 
 
 ### _3.2 Comparison Groups_
 
-The comparison groups you will use, if applicable.
+The comparison groups will be the states. 
 
 ### _3.3 Preliminary exploratory data analysis_
 
-Very preliminary exploratory data analysis, including some summary statistics and visualizations, along with some explanation on how they help you learn more about your data. 
+```{r which_locations_are_there}
+cov_19_vaccine %>%
+  distinct(location)
+```
+
+There's 65 unique locations: the 50 states plus some territories such as American Samoa. Maybe we can generate something like a heat map in the future, but for exploratory analysis, let's just look at some representative states. Let's use Pennsylvania, New York, and California. Also this preliminary analysis was useful in showing that New York is actually called "New York State", probably to disambiguate it from the city. 
+
+```{r three-state-total-vaccination-per-hundred}
+cov_19_vaccine %>%
+  filter(date == "2021-03-08" & 
+         location %in% c('New York State', 'California', 'Pennsylvania')) %>%
+  ggplot(aes(x = location, y = total_vaccinations_per_hundred)) + 
+  geom_col() + 
+  coord_cartesian(ylim=c(20, 30))
+```
+
+Here is the total vaccinations per hundred for New York State, California, and Pennsylvania for March 8th. It seems that New York and California, states especially known for their dire covid situations have been getting more vaccines. 
 
 ### _3.4 Possible Method(s)_
 
 The method(s) that you believe will be useful in answering your question(s). 
+A standard t-test to determine if there are any statistical anomalies would be helpful in answering if there is inequality in the distribution of vaccines. A heat map of the US can help visualize this. 
 
 What results from these specific statistical methods are needed to support your hypothesized answer?
-
+The t-test would need to show that there is a significant difference in the vaccine distribution. 
