@@ -259,16 +259,22 @@ library(ggplot2)</code></pre>
 <h2>Section 3: Data Analysis Plan</h2>
 <div id="variables" class="section level3">
 <h3><em>3.1 Variables</em></h3>
-<p>To answer “Where in the U.S. are people most likely to receive the Covid-19 vaccine?”, the following columns are of immediate interest to us: location, date, total_vaccinations_per_hundred, and share_doses_used.</p>
-<p>We will use a predictor variable of location in order to see how the state of the pandemic is varying over geographical area.</p>
-<p>We will use a predictor variable of date for a respresentative state, such as NY, in order to make predictions about the situation in the future.</p>
-<p>An explanatory variable of total_vaccinations_per_hundred tells us how close the state is towards achieving herd immunity. A high number would imply the state is a safer one to be in.</p>
-<p>An explanatory variable of share_doses_used tells us how in demand the vaccinations are in the state. In addition, many vaccine distribution centers give out vaccines to those in line when people who registered don’t show up, so this statistic additionally tells us how likely one is to get a vaccine by waiting in line.</p>
-<p>Mixing and matching the predictor and explanator variables can gives us different results.</p>
+<p>To answer “Where in the U.S. are people most likely to receive the Covid-19 vaccine?”, the following columns are of immediate interest to us: <code>location</code>, <code>date</code>, <code>total_vaccinations_per_hundred</code>, and <code>share_doses_used</code>.</p>
+<p>We will use a predictor variable of <code>location</code> in order to see how the state of the pandemic is varying over geographical area.</p>
+<p>We will use a predictor variable of <code>date</code> for a representative state, such as New York, in order to make predictions about the situation in the future.</p>
+<p>An explanatory variable of <code>total_vaccinations_per_hundred</code> tells us how close the state is towards achieving herd immunity. A high number would imply the state is a safer one to be in.</p>
+<p>An explanatory variable of <code>share_doses_used</code> tells us how in demand the vaccinations are in the state. In addition, many vaccine distribution centers give out vaccines to those in line when people who registered don’t show up, so this statistic additionally tells us how likely one is to get a vaccine by waiting in line.</p>
+<p>Mixing and matching the predictor and explanatory variables can gives us different results.</p>
+<p>In addition to the most probable location to receive vaccination, we could also compare the variables: <code>total_vaccinations</code>,<code>daily_vaccinations</code>, <code>people_fully_vaccinated</code>.</p>
+<p>Studying the relationship between these two variables could reveal to us how efficient each states are using the vaccines supply. This is because the Covid-19 vaccination is unique in two ways:</p>
+<ol style="list-style-type: decimal">
+<li><p>Covid-19 vaccines (from Moderna and Pfizer) requires 2 doses administered one month apart. However, it has reportedly been difficult to come back to vaccinations site to complete both doses. While we are aware that the Johnson &amp; Johnson’s vaccine only require 1 dosage, it has only been approved for use on February 28th 2021. Hence, we can filter for date up until February 28th 2021, though this would be a limitation to our analysis.</p></li>
+<li><p>Covid-19 vaccines have relatively short shelf-life and requires extremely low temperature to preserve. Hence, we could look into which states have the highest/lowest wastage of vaccine doses.</p></li>
+</ol>
 </div>
 <div id="comparison-groups" class="section level3">
 <h3><em>3.2 Comparison Groups</em></h3>
-<p>The comparison groups will be the states.</p>
+<p>The comparison groups will be their <code>location</code>, i.e., states.</p>
 </div>
 <div id="preliminary-exploratory-data-analysis" class="section level3">
 <h3><em>3.3 Preliminary exploratory data analysis</em></h3>
@@ -340,7 +346,7 @@ library(ggplot2)</code></pre>
 ## 63                  West Virginia
 ## 64                      Wisconsin
 ## 65                        Wyoming</code></pre>
-<p>There’s 65 unique locations: the 50 states plus some territories such as American Samoa. Maybe we can generate something like a heat map in the future, but for exploratory analysis, let’s just look at some representative states. Let’s use Pennsylvania, New York, and California. Also this preliminary analysis was useful in showing that New York is actually called “New York State”, probably to disambiguate it from the city.</p>
+<p>There’s 65 unique locations: the 50 states plus some territories such as American Samoa. We could generate something like a heat map in the future, but for exploratory analysis, let’s just look at some representative states. Let’s use Pennsylvania, New York, and California. Also this preliminary analysis was useful in showing that New York is actually called “New York State”, probably to disambiguate it from the city.</p>
 <pre class="r"><code>cov_19_vaccine %&gt;%
   filter(date == &quot;2021-03-08&quot; &amp; 
          location %in% c(&#39;New York State&#39;, &#39;California&#39;, &#39;Pennsylvania&#39;)) %&gt;%

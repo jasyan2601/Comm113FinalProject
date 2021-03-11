@@ -64,21 +64,30 @@ There are `r nrow(cov_19_vaccine)` rows (observations) representing daily Covid-
 
 ### _3.1 Variables_
 
-To answer "Where in the U.S. are people most likely to receive the Covid-19 vaccine?", the following columns are of immediate interest to us: location, date, total_vaccinations_per_hundred, and share_doses_used. 
+To answer "Where in the U.S. are people most likely to receive the Covid-19 vaccine?", the following columns are of immediate interest to us: `location`, `date`, `total_vaccinations_per_hundred`, and `share_doses_used`. 
 
-We will use a predictor variable of location in order to see how the state of the pandemic is varying over geographical area. 
+We will use a predictor variable of `location` in order to see how the state of the pandemic is varying over geographical area. 
 
-We will use a predictor variable of date for a respresentative state, such as NY, in order to make predictions about the situation in the future.
+We will use a predictor variable of `date` for a representative state, such as New York, in order to make predictions about the situation in the future.
 
-An explanatory variable of total_vaccinations_per_hundred tells us how close the state is towards achieving herd immunity. A high number would imply the state is a safer one to be in.
+An explanatory variable of `total_vaccinations_per_hundred` tells us how close the state is towards achieving herd immunity. A high number would imply the state is a safer one to be in.
 
-An explanatory variable of share_doses_used tells us how in demand the vaccinations are in the state. In addition, many vaccine distribution centers give out vaccines to those in line when people who registered don't show up, so this statistic additionally tells us how likely one is to get a vaccine by waiting in line. 
+An explanatory variable of `share_doses_used` tells us how in demand the vaccinations are in the state. In addition, many vaccine distribution centers give out vaccines to those in line when people who registered don't show up, so this statistic additionally tells us how likely one is to get a vaccine by waiting in line. 
 
-Mixing and matching the predictor and explanator variables can gives us different results. 
+Mixing and matching the predictor and explanatory variables can gives us different results. 
+
+In addition to the most probable location to receive vaccination, we could also compare the variables: `total_vaccinations`,`daily_vaccinations`, `people_fully_vaccinated`.
+
+Studying the relationship between these two variables could reveal to us how efficient each states are using the vaccines supply. This is because the Covid-19 vaccination is unique in two ways:
+
+1. Covid-19 vaccines (from Moderna and Pfizer) requires 2 doses administered one month apart. However, it has reportedly been difficult to come back to vaccinations site to complete both doses. While we are aware that the Johnson & Johnson's vaccine only require 1 dosage, it has only been approved for use on February 28th 2021. Hence, we can filter for date up until February 28th 2021, though this would be a limitation to our analysis.
+
+2. Covid-19 vaccines have relatively short shelf-life and requires extremely low temperature to preserve. Hence, we could look into which states have the highest/lowest wastage of vaccine doses.
+    
 
 ### _3.2 Comparison Groups_
 
-The comparison groups will be the states. 
+The comparison groups will be their `location`, i.e., states. 
 
 ### _3.3 Preliminary exploratory data analysis_
 
@@ -87,7 +96,7 @@ cov_19_vaccine %>%
   distinct(location)
 ```
 
-There's 65 unique locations: the 50 states plus some territories such as American Samoa. Maybe we can generate something like a heat map in the future, but for exploratory analysis, let's just look at some representative states. Let's use Pennsylvania, New York, and California. Also this preliminary analysis was useful in showing that New York is actually called "New York State", probably to disambiguate it from the city. 
+There's 65 unique locations: the 50 states plus some territories such as American Samoa. We could generate something like a heat map in the future, but for exploratory analysis, let's just look at some representative states. Let's use Pennsylvania, New York, and California. Also this preliminary analysis was useful in showing that New York is actually called "New York State", probably to disambiguate it from the city. 
 
 ```{r three-state-total-vaccination-per-hundred}
 cov_19_vaccine %>%
@@ -104,6 +113,7 @@ Here is the total vaccinations per hundred for New York State, California, and P
 
 The method(s) that you believe will be useful in answering your question(s). 
 A standard t-test to determine if there are any statistical anomalies would be helpful in answering if there is inequality in the distribution of vaccines. A heat map of the US can help visualize this. 
+
 
 What results from these specific statistical methods are needed to support your hypothesized answer?
 The t-test would need to show that there is a significant difference in the vaccine distribution. 
