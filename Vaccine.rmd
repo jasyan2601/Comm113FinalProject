@@ -1,5 +1,4 @@
 ---
-<<<<<<< HEAD
 title: "Vaccine.rmd"
 author: Team Blue - Jason Yan, Iris Lee, Vinh Hau
 output: html_document
